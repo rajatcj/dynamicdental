@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ============================================
   // CONTACT FORM
   // ============================================
-  const contactForm = document.getElementById('contact-form');
+  const contactForm = document.getElementById('appointment');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -236,10 +236,41 @@ document.addEventListener('DOMContentLoaded', function () {
   // ============================================
   // APPOINTMENT FORM (same behavior)
   // ============================================
-  const appointmentForm = document.getElementById('appointment-form');
-  if (appointmentForm) {
-    appointmentForm.addEventListener('submit', function (e) {
+  // const appointmentForm = document.getElementById('appointment-form');
+  // if (appointmentForm) {
+  //   appointmentForm.addEventListener('submit', function (e) {
+  //     e.preventDefault();
+  //     const btn = appointmentForm.querySelector('[type="submit"]');
+  //     const originalHTML = btn.innerHTML;
+  //     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Booking...';
+  //     btn.disabled = true;
+  //     setTimeout(() => {
+  //       btn.innerHTML = '<i class="fas fa-check"></i> Appointment Requested!';
+  //       btn.style.background = '#2ecc71';
+  //       appointmentForm.reset();
+  //       setTimeout(() => {
+  //         btn.innerHTML = originalHTML;
+  //         btn.disabled = false;
+  //         btn.style.background = '';
+  //       }, 3500);
+  //     }, 1500);
+  //   });
+  // }
+
+  // const contactForm = document.getElementById('appointment-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', e => {
       e.preventDefault();
+      const name = contactForm.querySelector('[name="name"]')?.value || '';
+      const phone = contactForm.querySelector('[name="phone"]')?.value || '';
+      const service = contactForm.querySelector('[name="service"]')?.value || '';
+      const doctor = contactForm.querySelector('[name="doctor"]')?.value || 'Not Specified';
+      const date = contactForm.querySelector('[name="date"]')?.value || 'Not Specified';
+      const time = contactForm.querySelector('[name="time"]')?.value || 'Not Specified';
+      const message = contactForm.querySelector('[name="notes"]')?.value || '';
+      const text = `Hello Dynamic Dental,\n\nName: ${name}\nPhone: ${phone}\nService Required: ${service}\n\nAppointment for : ${doctor}\n\nDate: ${date}\n\nTime: ${time}\n\nMessage: ${message}\n\n(Sent via website appointment form)`;
+      window.open(`https://wa.me/9779768051944?text=${encodeURIComponent(text)}`, '_blank');
+
       const btn = appointmentForm.querySelector('[type="submit"]');
       const originalHTML = btn.innerHTML;
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Booking...';
